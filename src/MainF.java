@@ -11,6 +11,7 @@ public class MainF extends JFrame{
     private JButton dataReadingsButton;
     private JLabel label1;
 
+
     public MainF( ){
         setContentPane(mainPanel);
         setTitle("Snorring machine");
@@ -25,47 +26,11 @@ public class MainF extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                EventQueue.invokeLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        JFrame frame = new JFrame("Test");
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        try
-                        {
-                            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        JPanel panel = new JPanel();
-                        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                        panel.setOpaque(true);
-                        JTextArea textArea = new JTextArea(15, 50);
-                        textArea.setWrapStyleWord(true);
-                        textArea.setEditable(false);
-                        textArea.setFont(Font.getFont(Font.SANS_SERIF));
-                        JScrollPane scroller = new JScrollPane(textArea);
-                        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                        scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                        JPanel inputpanel = new JPanel();
-                        inputpanel.setLayout(new FlowLayout());
-                        JTextField input = new JTextField(20);
-                        JButton button = new JButton("Enter");
-                        DefaultCaret caret = (DefaultCaret) textArea.getCaret();
-                        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-                        panel.add(scroller);
-                        inputpanel.add(input);
-                        inputpanel.add(button);
-                        panel.add(inputpanel);
-                        frame.getContentPane().add(BorderLayout.CENTER, panel);
-                        frame.pack();
-                        frame.setLocationByPlatform(true);
-                        frame.setVisible(true);
-                        frame.setResizable(false);
-                        input.requestFocus();
-                    }
-                });
+
+
+                                               JFrame try2 = new try2();
+                                               try2.setVisible(true);
+
             }
         });
         scheduleButton.setFont(new Font("Serif", Font.BOLD, 16));
@@ -80,6 +45,8 @@ public class MainF extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //get some readings updated every 10 sec from the database
+                JFrame info = new info();
+                info.setVisible(true);
             }
         });
 
@@ -87,7 +54,9 @@ public class MainF extends JFrame{
     public static void main ( String[] args){
         MainF myFrame = new MainF();
 
+
     }
+
 
 
 }
