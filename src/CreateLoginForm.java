@@ -13,8 +13,12 @@ import java.lang.Exception;
         //initialize button, panel, label, and text field
         JButton b1;
         JPanel newPanel;
+        JPanel newPanelError;
+        JLabel errorMessage;
         JLabel userLabel, passLabel;
+        JLabel errorLabel;
         final JTextField  textField1, textField2;
+        private Object messagebox;
 
         //calling constructor
         CreateLoginForm()
@@ -51,6 +55,10 @@ import java.lang.Exception;
             //perform action on button click
             b1.addActionListener(this);     //add action listener to button
             setTitle("LOGIN FORM");         //set title to the login form
+
+            //create the label for the error message
+            errorLabel = new JLabel();
+            errorLabel.setText("");
         }
 
         //define abstract method actionPerformed() which will be called on button click
@@ -66,9 +74,9 @@ import java.lang.Exception;
                 
                 MainF myFrame = new MainF();
             }
-            else{
+            else if (userValue.compareTo("student")!=0 && passValue.compareTo("Student")!=0){
                 //show error message
-                System.out.println("Please enter valid username and password");
+                JOptionPane.showMessageDialog(this, "Username and/or Password are not correct, try again");
             }
         }
     }
