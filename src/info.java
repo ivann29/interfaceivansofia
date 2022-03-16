@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class info extends JFrame{
     private JButton temperatureButton;
