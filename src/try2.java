@@ -14,14 +14,24 @@ public class try2 extends JFrame {
     private JLabel buzzer;
     private JLabel allOptions;
     private JToggleButton JTB3;
+    private JLabel introTitle;
+    private JPanel p1;
 
     public try2() {
 
         setContentPane(subPanel);
         setTitle("Settings");
-        setSize(1000, 400);
+        setSize(1000, 600);
         setResizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        p1.setBackground(Color.gray);
+        p1.setBounds(0,0,1000,300);
+
+        labelS.setFont(new Font("Ariel", Font.BOLD, 20));
+       // labelS.setBorder(BorderFactory.createLineBorder(Color.black, 5));
+       // labelS.setPreferredSize(new Dimension(100,60));
+        introTitle.setBorder(BorderFactory.createLineBorder(Color.black,4));
 
         JTB1.setText("OFF");
         JTB1.setForeground(Color.white);
@@ -29,7 +39,9 @@ public class try2 extends JFrame {
         buzzer.setText("The buzzer is currently turned off");
         buzzer.setForeground(Color.darkGray);
         buzzer.setSize(100,10);
-        buzzer.setFont(new Font("Serif", Font.BOLD, 14));
+        buzzer.setFont(new Font("Ariel", Font.BOLD, 14));
+        humidifier.setFont(new Font("Ariel", Font.BOLD, 14));
+        allOptions.setFont(new Font("Ariel", Font.BOLD, 14));
         subPanel.setBackground(Color.lightGray);
 
         JTB1.addActionListener(new ActionListener() {
