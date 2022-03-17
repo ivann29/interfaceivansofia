@@ -15,6 +15,7 @@ public class info extends JFrame{
         setContentPane(pann);
         setTitle("Sensor information");
         setSize(300, 380);
+        pann.setBackground(Color.lightGray);
         setResizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);

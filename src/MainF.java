@@ -16,6 +16,7 @@ public class MainF extends JFrame{
         setContentPane(mainPanel);
         setTitle("Snorring machine");
         setSize(450,300);
+        mainPanel.setBackground(Color.gray);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         //pack();
