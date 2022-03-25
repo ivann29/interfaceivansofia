@@ -12,6 +12,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import org.json.*;
 
+
+
 public class info extends JFrame{
     private JButton temperatureButton;
     private JButton lightIntensityButton;
@@ -32,28 +34,24 @@ public class info extends JFrame{
         setVisible(true);
 
 
-        String temp = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-        System.out.println(parseJSON(temp,"Temperature")+"°C");
-        celsius.setText(parseJSON(temp,"Temperature")+"°C");
 
-        String noise = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-        System.out.println(parseJSON(noise,"Noise")+"dB");
-        db.setText(parseJSON(noise,"Noise")+"dB");
+        System.out.println(getTemp() +"°C");
+        celsius.setText(getTemp() +"°C");
 
-        String brightness = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-        System.out.println(parseJSON(noise,"Brightness")+"‰");
-        light.setText(parseJSON(noise,"Brightness")+"‰");
+
+        System.out.println(getNoise()+"dB");
+        db.setText(getNoise()+"dB");
+
+
+        System.out.println(getLight()+"‰");
+        light.setText(getLight()+"‰");
 
 
         temperatureButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent arg0) {
                 if (arg0.getButton() == MouseEvent.BUTTON1){
-                    System.out.println("Temp pressed!");
-
-                    String temp = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-                    System.out.println(parseJSON(temp,"Temperature")+"°C");
-                    celsius.setText(parseJSON(temp,"Temperature")+"°C");
+                    celsius.setText(getTemp() +"°C");
                 }
 
             }
@@ -63,11 +61,7 @@ public class info extends JFrame{
             @Override
             public void mousePressed(MouseEvent arg0) {
                 if (arg0.getButton() == MouseEvent.BUTTON1){
-                    System.out.println("Light pressed!");
-
-                    String brightness = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-                    System.out.println(parseJSON(brightness,"Brightness")+"‰");
-                    light.setText(parseJSON(brightness,"Brightness")+"‰");
+                    light.setText(getLight()+"‰");
                 }
             }
         });
@@ -77,11 +71,7 @@ public class info extends JFrame{
             public void mousePressed(MouseEvent arg0) {
 
                 if (arg0.getButton() == MouseEvent.BUTTON1){
-                    System.out.println("Noise pressed!");
-
-                    String noise = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
-                    System.out.println(parseJSON(noise,"Noise")+"dB");
-                    db.setText(parseJSON(noise,"Noise")+"dB");
+                    db.setText(getNoise()+"dB");
                 }
             }
         });
@@ -135,9 +125,23 @@ public class info extends JFrame{
         return var;
     }
 
+    public String getTemp(){
+        String temp = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
+        return parseJSON(temp,"Temperature");
+    }
+
+    public String getNoise(){
+        String temp = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
+        return parseJSON(temp,"Noise");
+    }
+
+    public String getLight(){
+        String temp = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest" );
+        return parseJSON(temp,"Brightness").substring(0,6);
+    }
 
 
-    //pack();
+
     public static void main ( String[] args){
         info myFrame2 = new info();
 
