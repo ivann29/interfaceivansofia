@@ -85,8 +85,6 @@ public class info extends JFrame{
                 }
             }
         });
-
-
     }
 
     public String makeGETRequest(String urlName){
