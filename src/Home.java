@@ -33,6 +33,7 @@ public class Home extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent l) {
                 Login login = new Login();
+                setVisible(false);
             }
         });
 
@@ -40,6 +41,7 @@ public class Home extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent r) {
                 Register register = new Register();
+                setVisible(false);
             }
         });
 

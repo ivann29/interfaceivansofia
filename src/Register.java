@@ -71,7 +71,9 @@ public class Register extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 makeGETRequest(Register + textField1.getText() + "/" + textField2.getText() );
-                Login Login = new Login();
+                Home home = new Home();
+                setVisible(false);
+
             }
         });     //add action listener to button
         setTitle("REGISTER");         //set title to the login form

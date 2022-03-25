@@ -1,7 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class try2 extends JFrame {
     private JPanel subPanel;
@@ -16,193 +32,277 @@ public class try2 extends JFrame {
     private JToggleButton JTB3;
     private JLabel introTitle;
     private JPanel p1;
+    private boolean humIsTurnedON;
+    private boolean buzzIsTurnedON;
 
     public try2() {
-
-        setContentPane(subPanel);
-        setTitle("Settings");
-        setSize(1000, 600);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-        p1.setBackground(Color.gray);
-        p1.setBounds(0,0,1000,300);
-
-        labelS.setFont(new Font("Ariel", Font.BOLD, 20));
-       // labelS.setBorder(BorderFactory.createLineBorder(Color.black, 5));
-       // labelS.setPreferredSize(new Dimension(100,60));
-        introTitle.setBorder(BorderFactory.createLineBorder(Color.black,4));
-
-        JTB1.setText("OFF");
-        JTB1.setForeground(Color.white);
-        JTB1.setBackground(Color.darkGray);
-        buzzer.setText("The buzzer is currently turned off");
-        buzzer.setForeground(Color.darkGray);
-        buzzer.setSize(100,10);
-        buzzer.setFont(new Font("Ariel", Font.BOLD, 14));
-        humidifier.setFont(new Font("Ariel", Font.BOLD, 14));
-        allOptions.setFont(new Font("Ariel", Font.BOLD, 14));
-        subPanel.setBackground(Color.lightGray);
-
-        JTB1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if(JTB1.isSelected()){
-                    JTB1.setText("ON");
-                    JTB1.setBackground(Color.blue);
-                    buzzer.setText("The buzzer is currently turned on");
-                    buzzer.setForeground(Color.blue);
-                    subPanel.setBackground(Color.white);
-                    if(JTB2.getText().equals("ON")){
-                        JTB3.setText("ON");
-                        JTB3.setBackground(Color.blue);
-                        allOptions.setText("All of the options are turned on");
-                        JTB1.setText("ON");
-                        JTB1.setBackground(Color.blue);
-                        buzzer.setText("The buzzer is currently turned on");
-                        JTB2.setText("ON");
-                        JTB2.setBackground(Color.blue);
-                        humidifier.setText("The buzzer is currently turned on");
-                        buzzer.setForeground(Color.blue);
-                        humidifier.setForeground(Color.blue);
-                        allOptions.setForeground(Color.blue);
-                        subPanel.setBackground(Color.white);
+      //  this.$$$setupUI$$$();
+        this.setContentPane(this.subPanel);
+        this.setTitle("Settings");
+        this.setSize(1000, 600);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(1);
+        this.p1.setBackground(Color.gray);
+        this.p1.setBounds(0, 0, 1000, 300);
+        this.labelS.setFont(new Font("Ariel", 1, 20));
+        this.introTitle.setBorder(BorderFactory.createLineBorder(Color.black, 4));
+        this.buzzer.setSize(100, 10);
+        this.buzzer.setFont(new Font("Ariel", 1, 14));
+        this.humidifier.setFont(new Font("Ariel", 1, 14));
+        this.allOptions.setFont(new Font("Ariel", 1, 14));
+        this.subPanel.setBackground(Color.lightGray);
+        this.humIsTurnedON = false;
+        this.buzzIsTurnedON = false;
+        this.JTB1.setText("OFF");
+        this.JTB1.setForeground(Color.white);
+        this.JTB1.setBackground(Color.darkGray);
+        this.buzzer.setText("The buzzer is currently turned off");
+        this.buzzer.setForeground(Color.darkGray);
+        this.checkAutomatic();
+        this.JTB1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (try2.this.JTB1.isSelected()) {
+                    try2.this.JTB1.setText("ON");
+                    try2.this.JTB1.setBackground(Color.blue);
+                    try2.this.buzzer.setText("The buzzer is currently turned on");
+                    try2.this.buzzer.setForeground(Color.blue);
+                    try2.this.subPanel.setBackground(Color.white);
+                    if (try2.this.JTB2.getText().equals("ON")) {
+                        try2.this.JTB3.setText("ON");
+                        try2.this.JTB3.setBackground(Color.blue);
+                        try2.this.allOptions.setText("All of the options are turned on");
+                        try2.this.JTB1.setText("ON");
+                        try2.this.JTB1.setBackground(Color.blue);
+                        try2.this.buzzer.setText("The buzzer is currently turned on");
+                        try2.this.JTB2.setText("ON");
+                        try2.this.JTB2.setBackground(Color.blue);
+                        try2.this.humidifier.setText("The buzzer is currently turned on");
+                        try2.this.buzzer.setForeground(Color.blue);
+                        try2.this.humidifier.setForeground(Color.blue);
+                        try2.this.allOptions.setForeground(Color.blue);
+                        try2.this.subPanel.setBackground(Color.white);
                     }
-                }else{
-                    JTB1.setText("OFF");
-                    JTB1.setBackground(Color.darkGray);
-                    buzzer.setText("The buzzer is currently turned off");
-                    buzzer.setForeground(Color.darkGray);
-                    if(JTB2.getText().equals("OFF")){
-                        JTB3.setText("OFF");
-                        JTB3.setBackground(Color.darkGray);
-                        allOptions.setText("All of the options are turned off");
-                        JTB1.setText("OFF");
-                        JTB1.setBackground(Color.darkGray);
-                        buzzer.setText("The buzzer is currently turned off");
-                        JTB2.setText("OFF");
-                        JTB2.setBackground(Color.darkGray);
-                        humidifier.setText("The buzzer is currently turned off");
-                        humidifier.setForeground(Color.darkGray);
-                        buzzer.setForeground(Color.darkGray);
-                        allOptions.setForeground(Color.darkGray);
-                        subPanel.setBackground(Color.gray);
+                } else {
+                    try2.this.JTB1.setText("OFF");
+                    try2.this.JTB1.setBackground(Color.darkGray);
+                    try2.this.buzzer.setText("The buzzer is currently turned off");
+                    try2.this.buzzer.setForeground(Color.darkGray);
+                    if (try2.this.JTB2.getText().equals("OFF")) {
+                        try2.this.JTB3.setText("OFF");
+                        try2.this.JTB3.setBackground(Color.darkGray);
+                        try2.this.allOptions.setText("All of the options are turned off");
+                        try2.this.JTB1.setText("OFF");
+                        try2.this.JTB1.setBackground(Color.darkGray);
+                        try2.this.buzzer.setText("The buzzer is currently turned off");
+                        try2.this.JTB2.setText("OFF");
+                        try2.this.JTB2.setBackground(Color.darkGray);
+                        try2.this.humidifier.setText("The buzzer is currently turned off");
+                        try2.this.humidifier.setForeground(Color.darkGray);
+                        try2.this.buzzer.setForeground(Color.darkGray);
+                        try2.this.allOptions.setForeground(Color.darkGray);
+                        try2.this.subPanel.setBackground(Color.gray);
                     }
-                    //subPanel.setBackground(Color.lightGray);
                 }
 
             }
         });
-
-        JTB2.setText("OFF");
-        JTB2.setBackground(Color.darkGray);
-        JTB2.setForeground(Color.white);
-        humidifier.setText("The buzzer is currently turned off");
-        humidifier.setForeground(Color.darkGray);
-
-        JTB2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            { if(JTB2.isSelected()){
-                    JTB2.setText("ON");
-                    JTB2.setBackground(Color.blue);
-                    humidifier.setText("The buzzer is currently turned on");
-                    humidifier.setForeground(Color.blue);
-                    subPanel.setBackground(Color.white);
-                    if(JTB1.getText().equals("ON")){
-                        JTB3.setText("ON");
-                        allOptions.setText("All of the options are turned on");
-                        JTB3.setBackground(Color.blue);
-                        JTB1.setText("ON");
-                        JTB1.setBackground(Color.blue);
-                        buzzer.setText("The buzzer is currently turned on");
-                        JTB2.setText("ON");
-                        JTB2.setBackground(Color.blue);
-                        humidifier.setText("The buzzer is currently turned on");
-                        buzzer.setForeground(Color.blue);
-                        humidifier.setForeground(Color.blue);
-                        allOptions.setForeground(Color.blue);
-                        subPanel.setBackground(Color.white);
+        this.JTB2.setText("OFF");
+        this.JTB2.setBackground(Color.darkGray);
+        this.JTB2.setForeground(Color.white);
+        this.humidifier.setText("The humidifier is currently turned off");
+        this.humidifier.setForeground(Color.darkGray);
+        this.checkAutomatic();
+        this.JTB2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (try2.this.JTB2.isSelected()) {
+                    try2.this.JTB2.setText("ON");
+                    try2.this.JTB2.setBackground(Color.blue);
+                    try2.this.humidifier.setText("The humidifier is currently turned on");
+                    try2.this.humidifier.setForeground(Color.blue);
+                    try2.this.subPanel.setBackground(Color.white);
+                    if (try2.this.JTB1.getText().equals("ON")) {
+                        try2.this.JTB3.setText("ON");
+                        try2.this.allOptions.setText("All of the options are turned on");
+                        try2.this.JTB3.setBackground(Color.blue);
+                        try2.this.JTB1.setText("ON");
+                        try2.this.JTB1.setBackground(Color.blue);
+                        try2.this.buzzer.setText("The buzzer is currently turned on");
+                        try2.this.JTB2.setText("ON");
+                        try2.this.JTB2.setBackground(Color.blue);
+                        try2.this.humidifier.setText("The humidifier is currently turned on");
+                        try2.this.buzzer.setForeground(Color.blue);
+                        try2.this.humidifier.setForeground(Color.blue);
+                        try2.this.allOptions.setForeground(Color.blue);
+                        try2.this.subPanel.setBackground(Color.white);
                     }
-                }else{
-                    JTB2.setText("OFF");
-                    JTB2.setBackground(Color.darkGray);
-                    JTB3.setText("OFF");
-                    humidifier.setText("The buzzer is currently turned off");
-                    humidifier.setForeground(Color.darkGray);
-                if(JTB2.getText().equals("OFF")){
-                    JTB3.setText("OFF");
-                    JTB3.setBackground(Color.darkGray);
-                    allOptions.setText("All of the options are turned off");
-                    JTB1.setText("OFF");
-                    JTB1.setBackground(Color.darkGray);
-                    buzzer.setText("The buzzer is currently turned off");
-                    JTB2.setText("OFF");
-                    JTB2.setBackground(Color.darkGray);
-                    humidifier.setText("The buzzer is currently turned off");
-                    humidifier.setForeground(Color.darkGray);
-                    buzzer.setForeground(Color.darkGray);
-                    allOptions.setForeground(Color.darkGray);
-                    subPanel.setBackground(Color.gray);
-                }
-
-                  //  subPanel.setBackground(Color.lightGray);
-                 //   subPanel.setBackground(Color.gray);
-                }
-            }
-        });
-
-        JTB3.setText("OFF");
-        JTB3.setBackground(Color.darkGray);
-        JTB3.setForeground(Color.white);
-        allOptions.setText("All of the options are turned off");
-        allOptions.setForeground(Color.darkGray);
-
-        JTB3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if(JTB3.isSelected() ){
-                    JTB3.setText("ON");
-                    JTB3.setBackground(Color.blue);
-                    JTB1.setText("ON");
-                    allOptions.setText("All of the options are turned on");
-                    JTB1.setBackground(Color.blue);
-                    buzzer.setText("The buzzer is currently turned on");
-                    JTB2.setText("ON");
-                    JTB2.setBackground(Color.blue);
-                    humidifier.setText("The buzzer is currently turned on");
-                    buzzer.setForeground(Color.blue);
-                    humidifier.setForeground(Color.blue);
-                    allOptions.setForeground(Color.blue);
-                    subPanel.setBackground(Color.white);
-                }else{
-                    JTB3.setText("OFF");
-                    JTB3.setBackground(Color.darkGray);
-                    allOptions.setText("All of the options are turned off");
-                    JTB1.setText("OFF");
-                    JTB1.setBackground(Color.darkGray);
-                    buzzer.setText("The buzzer is currently turned off");
-                    JTB2.setText("OFF");
-                    JTB2.setBackground(Color.darkGray);
-                    humidifier.setText("The buzzer is currently turned off");
-                    humidifier.setForeground(Color.darkGray);
-                    buzzer.setForeground(Color.darkGray);
-                    allOptions.setForeground(Color.darkGray);
-                    subPanel.setBackground(Color.gray);
+                } else {
+                    try2.this.JTB2.setText("OFF");
+                    try2.this.JTB2.setBackground(Color.darkGray);
+                    try2.this.JTB3.setText("OFF");
+                    try2.this.humidifier.setText("The humidifier is currently turned off");
+                    try2.this.humidifier.setForeground(Color.darkGray);
+                    if (try2.this.JTB2.getText().equals("OFF")) {
+                        try2.this.JTB3.setText("OFF");
+                        try2.this.JTB3.setBackground(Color.darkGray);
+                        try2.this.allOptions.setText("All of the options are turned off");
+                        try2.this.JTB1.setText("OFF");
+                        try2.this.JTB1.setBackground(Color.darkGray);
+                        try2.this.buzzer.setText("The buzzer is currently turned off");
+                        try2.this.JTB2.setText("OFF");
+                        try2.this.JTB2.setBackground(Color.darkGray);
+                        try2.this.humidifier.setText("The humidifier is currently turned off");
+                        try2.this.humidifier.setForeground(Color.darkGray);
+                        try2.this.buzzer.setForeground(Color.darkGray);
+                        try2.this.allOptions.setForeground(Color.darkGray);
+                        try2.this.subPanel.setBackground(Color.gray);
+                    }
                 }
 
             }
         });
-        setVisible(true);
+        this.JTB3.setText("OFF");
+        this.JTB3.setBackground(Color.darkGray);
+        this.JTB3.setForeground(Color.white);
+        this.allOptions.setText("All of the options are turned off");
+        this.allOptions.setForeground(Color.darkGray);
+        this.checkAutomatic();
+        this.JTB3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (try2.this.JTB3.isSelected()) {
+                    try2.this.JTB3.setText("ON");
+                    try2.this.JTB3.setBackground(Color.blue);
+                    try2.this.JTB1.setText("ON");
+                    try2.this.allOptions.setText("All of the options are turned on");
+                    try2.this.JTB1.setBackground(Color.blue);
+                    try2.this.buzzer.setText("The buzzer is currently turned on");
+                    try2.this.JTB2.setText("ON");
+                    try2.this.JTB2.setBackground(Color.blue);
+                    try2.this.humidifier.setText("The humidifier is currently turned on");
+                    try2.this.buzzer.setForeground(Color.blue);
+                    try2.this.humidifier.setForeground(Color.blue);
+                    try2.this.allOptions.setForeground(Color.blue);
+                    try2.this.subPanel.setBackground(Color.white);
+                } else {
+                    try2.this.JTB3.setText("OFF");
+                    try2.this.JTB3.setBackground(Color.darkGray);
+                    try2.this.allOptions.setText("All of the options are turned off");
+                    try2.this.JTB1.setText("OFF");
+                    try2.this.JTB1.setBackground(Color.darkGray);
+                    try2.this.buzzer.setText("The buzzer is currently turned off");
+                    try2.this.JTB2.setText("OFF");
+                    try2.this.JTB2.setBackground(Color.darkGray);
+                    try2.this.humidifier.setText("The humidifier is currently turned off");
+                    try2.this.humidifier.setForeground(Color.darkGray);
+                    try2.this.buzzer.setForeground(Color.darkGray);
+                    try2.this.allOptions.setForeground(Color.darkGray);
+                    try2.this.subPanel.setBackground(Color.gray);
+                }
+
+            }
+        });
+        this.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        new try2();
+    }
 
-        //pack();
-        public static void main ( String[] args){
-            try2 myFrame1 = new try2();
-
-
+    public void checkAutomatic() {
+        String temperature = this.makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest");
+        String noisiness = this.makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest");
+        String brightness = this.makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetLatest");
+        String bright = this.parseJSON(brightness, "Brightness");
+        String noise = this.parseJSON(noisiness, "Noise");
+        String temp = this.parseJSON(temperature, "Temperature");
+        Float brightInt = Float.valueOf(bright);
+        Float noiseFloat = Float.valueOf(noise);
+        Float tempFloat = Float.valueOf(temp);
+        System.out.println(brightInt);
+        System.out.println(noiseFloat);
+        System.out.println(tempFloat);
+        if (brightInt < 400.0F && noiseFloat > 30.0F && tempFloat > 21.0F) {
+            this.JTB3.setText("ON");
+            this.JTB3.setBackground(Color.blue);
+            this.JTB1.setText("ON");
+            this.allOptions.setText("All of the options are turned on");
+            this.JTB1.setBackground(Color.blue);
+            this.buzzer.setText("The buzzer is currently turned on");
+            this.JTB2.setText("ON");
+            this.JTB2.setBackground(Color.blue);
+            this.humidifier.setText("The humidifier is currently turned on");
+            this.buzzer.setForeground(Color.blue);
+            this.humidifier.setForeground(Color.blue);
+            this.allOptions.setForeground(Color.blue);
+            this.subPanel.setBackground(Color.white);
+        } else if (brightInt < 400.0F && noiseFloat > 30.0F && tempFloat < 21.0F) {
+            this.JTB1.setText("ON");
+            this.JTB1.setBackground(Color.blue);
+            this.buzzer.setText("The buzzer is currently turned on");
+            this.buzzer.setForeground(Color.blue);
+            this.subPanel.setBackground(Color.white);
+            if (this.JTB2.getText().equals("ON")) {
+                this.JTB3.setText("ON");
+                this.JTB3.setBackground(Color.blue);
+                this.allOptions.setText("All of the options are turned on");
+                this.JTB1.setText("ON");
+                this.JTB1.setBackground(Color.blue);
+                this.buzzer.setText("The buzzer is currently turned on");
+                this.JTB2.setText("ON");
+                this.JTB2.setBackground(Color.blue);
+                this.humidifier.setText("The buzzer is currently turned on");
+                this.buzzer.setForeground(Color.blue);
+                this.humidifier.setForeground(Color.blue);
+                this.allOptions.setForeground(Color.blue);
+                this.subPanel.setBackground(Color.white);
+            }
         }
+
+    }
+
+    public String makeGETRequest(String urlName) {
+        BufferedReader rd = null;
+        StringBuilder sb = null;
+        String line = null;
+
+        try {
+            URL url = new URL(urlName);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            sb = new StringBuilder();
+
+            while((line = rd.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+
+            conn.disconnect();
+            return sb.toString();
+        } catch (MalformedURLException var7) {
+            var7.printStackTrace();
+        } catch (ProtocolException var8) {
+            var8.printStackTrace();
+        } catch (IOException var9) {
+            var9.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public String parseJSON(String jsonString, String key) {
+        String var = "";
+
+        try {
+            JSONArray array = new JSONArray(jsonString);
+
+            for(int i = 0; i < array.length(); ++i) {
+                JSONObject curObject = array.getJSONObject(i);
+                var = var + curObject.getString(key);
+            }
+        } catch (JSONException var7) {
+            var7.printStackTrace();
+        }
+
+        return var;
+    }
 }

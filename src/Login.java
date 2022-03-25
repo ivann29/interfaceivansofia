@@ -25,7 +25,6 @@ public class Login extends JFrame{
     final JTextField  textField1, textField2;
     private Object messagebox;
 
-
     public Login(){
 
         String Username = makeGETRequest("https://studev.groept.be/api/a21ib2c06/GetUsers/" );
@@ -38,7 +37,6 @@ public class Login extends JFrame{
 
         userLabel = new JLabel();
         userLabel.setText("Username");      //set label value for textField1
-
         textField1 = new JTextField(15);    //set length of the text
         errorMessage = new JLabel();
         passLabel = new JLabel();
@@ -73,6 +71,7 @@ public class Login extends JFrame{
                 if (Username1.equals(userValue) && Password1.equals(passValue)){
                     MainF mainF = new MainF();
                     errorMessage.setText("Login Successful");
+                    setVisible(false);
                 }
                 else if (userValue.compareTo(Username1)!=0 && passValue.compareTo(Password1)!=0){
                     errorMessage.setText("Username and/or Password incorrect");
@@ -80,9 +79,7 @@ public class Login extends JFrame{
             }
         });
 
-        //add action listener to button
-        setTitle("LOGIN");         //set title to the login form
-
+        setTitle("LOGIN");
         setResizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);
@@ -118,7 +115,6 @@ public class Login extends JFrame{
             e.printStackTrace();
         }
         return "";
-
     }
 
     public String parseJSON(String jsonString,String key){
@@ -137,4 +133,7 @@ public class Login extends JFrame{
         return var;
     }
 
+    public static void main(String[] args) {
+        Login login = new Login();
+    }
 }
